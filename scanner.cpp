@@ -1,12 +1,13 @@
-#include "scanner.h"    
+#include "scanner.h"
 
-//Construtor que recebe uma string com o nome do arquivo 
-//de entrada e preenche input com seu conteúdo.
 Scanner::Scanner(string input)
 {
-    /*this->input = input;
-    cout << "Entrada: " << input << endl << "Tamanho: " 
-         << input.length() << endl;*/
+    this->input = input;
+    cout << "INPUT: " << input << endl
+         << "SIZE: "
+         << input.length() << endl
+         << endl;
+
     pos = 0;
     line = 1;
 
@@ -15,45 +16,172 @@ Scanner::Scanner(string input)
 
     if (inputFile.is_open())
     {
-        while (getline(inputFile,line) )
+        while (getline(inputFile, line))
         {
             this->input.append(line + '\n');
         }
         inputFile.close();
     }
-    else 
-        cout << "Unable to open file\n"; 
+    else
+        cout << "UNABLE TO OPEN FILE\n";
 
-    //A próxima linha deve ser comentada posteriormente.
-    //Ela é utilizada apenas para verificar se o 
-    //preenchimento de input foi feito corretamente.
-    cout << this->input;
-
+    cout << this->input << endl;
 }
 
-int
-Scanner::getLine()
+int Scanner::getLine()
 {
     return line;
 }
 
-//Método que retorna o próximo token da entrada
-Token* 
+Token *
 Scanner::nextToken()
 {
-    Token* tok;
+    Token *tok;
     string lexeme;
 
-    //TODO
+    // ---------- WHITESPACE ----------
+    while (pos < input.length() && isspace(input[pos]))
+    {
+        if (input[pos] == '\n')
+            line++;
+        pos++;
+    }
 
+    // ---------- END_OF_FILE ----------
+    if (pos >= input.length())
+        return new Token(END_OF_FILE);
+
+    char currentChar = input[pos];
+
+    // ---------- ID OR RESERVED_KEYWORD ----------
+    if (isalpha(currentChar))
+    {
+        lexeme += currentChar;
+        pos++;
+
+        while (pos < input.length() && (isalnum(input[pos]) || input[pos] == '_' || input[pos] == '.'))
+        {
+            lexeme += input[pos];
+            pos++;
+        }
+
+        if (lexeme == "boolean" || lexeme == "class" || lexeme == "else" ||
+            lexeme == "extends" || lexeme == "false" || lexeme == "if" ||
+            lexeme == "int" || lexeme == "length" || lexeme == "main" ||
+            lexeme == "new" || lexeme == "public" || lexeme == "return" ||
+            lexeme == "static" || lexeme == "String" || lexeme == "this" ||
+            lexeme == "true" || lexeme == "void" || lexeme == "while")
+
+            tok = new Token(RESERVED_KEYWORD, lexeme);
+
+        else if (lexeme == "System.out.println")
+        {
+            tok = new Token(RESERVED_KEYWORD, "System.out.println");
+        }
+
+        else
+            tok = new Token(ID, lexeme);
+    }
+
+    // ---------- INTEGER_LITERAL ----------
+    else if (isdigit(currentChar))
+    {
+        lexeme += currentChar;
+        pos++;
+
+        while (pos < input.length() && isdigit(input[pos]))
+        {
+            lexeme += input[pos];
+            pos++;
+        }
+
+        tok = new Token(INTEGER_LITERAL, lexeme);
+    }
+
+    // ---------- COMMENT ----------
+    else if (currentChar == '/')
+    {
+        // LINE COMMENT
+        if (pos + 1 < input.length() && input[pos + 1] == '/')
+        {
+            pos += 2;
+
+            while (pos < input.length() && input[pos] != '\n')
+                pos++;
+
+            return nextToken();
+        }
+
+        // BLOCK COMMENT
+        else if (pos + 1 < input.length() && input[pos + 1] == '*')
+        {
+            pos += 2;
+
+            while (pos < input.length() - 1 && (input[pos] != '*' || input[pos + 1] != '/'))
+            {
+                if (input[pos] == '\n')
+                    line++;
+                pos++;
+            }
+
+            if (pos >= input.length() - 1)
+                lexicalError("BLOCK COMMENT NOT CLOSED.");
+
+            pos += 2;
+
+            return nextToken();
+        }
+
+        // ---------- OP ----------
+        else
+        {
+            tok = new Token(OP, "/");
+            pos++;
+        }
+    }
+
+    else if (currentChar == '<' || currentChar == '>' || currentChar == '+' || currentChar == '-' ||
+             currentChar == '*' || currentChar == '=' || currentChar == '!' || currentChar == '&')
+    {
+        lexeme += currentChar;
+        pos++;
+
+        // Compund operator
+        if (pos < input.length() && (input[pos - 1] == '&' && input[pos] == '&' ||
+                                     input[pos - 1] == '=' && input[pos] == '=' ||
+                                     input[pos - 1] == '!' && input[pos] == '='))
+        {
+            lexeme += input[pos];
+            pos++;
+        }
+
+        tok = new Token(OP, lexeme);
+    }
+
+    // ---------- SEP ----------
+    else if (currentChar == '(' || currentChar == ')' ||
+             currentChar == '[' || currentChar == ']' ||
+             currentChar == '{' || currentChar == '}' ||
+             currentChar == ';' || currentChar == '.' ||
+             currentChar == ',')
+    {
+        lexeme += currentChar;
+        pos++;
+
+        tok = new Token(SEP, lexeme);
+    }
+    else
+    {
+        string errorMsg = "Invalid character: ";
+        errorMsg += currentChar;
+        lexicalError(errorMsg);
+    }
     return tok;
- 
 }
 
-void 
-Scanner::lexicalError(string msg)
+void Scanner::lexicalError(string msg)
 {
-    cout << "Linha "<< line << ": " << msg << endl;
-    
+    cout << "LINE " << line << ": " << msg << endl;
+
     exit(EXIT_FAILURE);
 }
