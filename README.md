@@ -10,16 +10,16 @@ Implementation of the lexical analyzer for the MiniJava programming language wit
 
 `2. INTEGER LITERALS` A sequence of decimal digits representing an integer number.
 
-`3. OPERATORS` && < > + - \* / = == != !
-
-`4. SEPARATORS` ( ) [ ] { } ; . ,
-
 `5. RESERVED WORDS` boolean, class, else, extends, false, if, int, length,
 main, new, public, return, static, String, System.out.println, this, true, void, and while.
 
 `6. COMMENTS` Comments should be ignored. There are two types: line comments (starting with // and extending to the end of the line) and block comments (starting with /_ and ending with _/ without nesting).
 
 `7. WHITESPACE` Whitespace should be ignored. It includes \n \t \r \f.
+
+`3. OPERATORS` && < > + - \* / = == != !
+
+`4. SEPARATORS` ( ) [ ] { } ; . ,
 
 ### COMPILE / EXECUTE
 
