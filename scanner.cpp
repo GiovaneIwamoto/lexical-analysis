@@ -2,7 +2,7 @@
 
 Scanner::Scanner(string input)
 {
-    this->input = input;
+    // this->input = input;
     cout << "INPUT: " << input << endl
          << "SIZE: "
          << input.length() << endl
@@ -25,7 +25,7 @@ Scanner::Scanner(string input)
     else
         cout << "UNABLE TO OPEN FILE\n";
 
-    // cout << this->input << endl;
+    cout << this->input << endl;
 }
 
 int Scanner::getLine()
@@ -64,7 +64,6 @@ Scanner::nextToken()
             lexeme += input[pos];
             pos++;
         }
-
         if (lexeme == "boolean" || lexeme == "class" || lexeme == "else" ||
             lexeme == "extends" || lexeme == "false" || lexeme == "if" ||
             lexeme == "int" || lexeme == "length" || lexeme == "main" ||
@@ -72,7 +71,6 @@ Scanner::nextToken()
             lexeme == "static" || lexeme == "String" || lexeme == "this" ||
             lexeme == "true" || lexeme == "void" || lexeme == "while")
         {
-            cout << lexeme;
             tok = new Token(RESERVED_KEYWORD, lexeme);
         }
 
