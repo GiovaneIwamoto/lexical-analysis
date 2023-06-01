@@ -19,7 +19,7 @@ main, new, public, return, static, String, System.out.println, this, true, void,
 
 `COMMENTS` Comments should be ignored. There are two types: line comments (starting with // and extending to the end of the line) and block comments (starting with /_ and ending with _/ without nesting).
 
-`WHITESPACE` Whitespace should be ignored. It includes \n, \t, \r, and \f.
+`WHITESPACE` Whitespace should be ignored. It includes \n \t \r \f.
 
 ### COMPILE / EXECUTE
 
