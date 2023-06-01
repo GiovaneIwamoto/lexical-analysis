@@ -10,9 +10,9 @@ IDENTIFIERS: A sequence of letters, digits, and underscores, always starting wit
 
 INTEGER LITERALS: A sequence of decimal digits representing an integer number.
 
-OPERATORS: &&, <, >, +, -, \*, /, =, ==, !=, and !.
+OPERATORS: && < > + - \* / = == != !
 
-SEPARATORS: (, ), [, ], {, }, ;, ., and ,.
+SEPARATORS: ( ) [ ] { } ; . ,
 
 RESERVED WORDS: boolean, class, else, extends, false, if, int, length,
 main, new, public, return, static, String, System.out.println, this, true, void, and while.
