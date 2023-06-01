@@ -9,12 +9,10 @@ enum Names
     UNDEF,
     ID,
     INTEGER_LITERAL,
-    OP,               // &&  <  >  +  −  ∗  /  =  ==  !=  !
-    SEP,              // (  )  [  ]  {  }  ;  .  ,
-    RESERVED_KEYWORD, // boolean, class, else, extends, false, if, int, length, main, new, public, return,
-                      // static, String, System.out.println, this, true, void and while
-    COMMENT,
-    WHITESPACE, // \n \t \r \f
+    OP,
+    SEP,
+    RESERVED_KEYWORD,
+    WHITESPACE,
     END_OF_FILE
 };
 
