@@ -6,20 +6,20 @@ Implementation of the lexical analyzer for the MiniJava programming language wit
 
 ### TOKENS
 
-IDENTIFIERS: A sequence of letters, digits, and underscores, always starting with a letter. The language distinguishes between uppercase and lowercase letters.
+`IDENTIFIERS` A sequence of letters, digits, and underscores, always starting with a letter. The language distinguishes between uppercase and lowercase letters.
 
-INTEGER LITERALS: A sequence of decimal digits representing an integer number.
+`INTEGER LITERALS` A sequence of decimal digits representing an integer number.
 
-OPERATORS: && < > + - \* / = == != !
+`OPERATORS` && < > + - \* / = == != !
 
-SEPARATORS: ( ) [ ] { } ; . ,
+`SEPARATORS` ( ) [ ] { } ; . ,
 
-RESERVED WORDS: boolean, class, else, extends, false, if, int, length,
+`RESERVED WORDS` boolean, class, else, extends, false, if, int, length,
 main, new, public, return, static, String, System.out.println, this, true, void, and while.
 
-COMMENTS: Comments should be ignored. There are two types: line comments (starting with // and extending to the end of the line) and block comments (starting with /_ and ending with _/ without nesting).
+`COMMENTS` Comments should be ignored. There are two types: line comments (starting with // and extending to the end of the line) and block comments (starting with /_ and ending with _/ without nesting).
 
-WHITESPACE: Whitespace should be ignored. It includes \n, \t, \r, and \f.
+`WHITESPACE` Whitespace should be ignored. It includes \n, \t, \r, and \f.
 
 ### COMPILE / EXECUTE
 
