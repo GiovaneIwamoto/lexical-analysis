@@ -25,7 +25,7 @@ Scanner::Scanner(string input)
     else
         cout << "UNABLE TO OPEN FILE\n";
 
-    cout << this->input << endl;
+    // cout << this->input << endl;
 }
 
 int Scanner::getLine()
@@ -40,7 +40,7 @@ Scanner::nextToken()
     string lexeme;
 
     // ---------- WHITESPACE ----------
-    while (pos < input.length() && isspace(input[pos]))
+    while (pos < static_cast<int>(input.length()) && isspace(input[pos]))
     {
         if (input[pos] == '\n')
             line++;
@@ -48,7 +48,7 @@ Scanner::nextToken()
     }
 
     // ---------- END_OF_FILE ----------
-    if (pos >= input.length())
+    if (pos >= static_cast<int>(input.length()))
         return new Token(END_OF_FILE);
 
     char currentChar = input[pos];
@@ -59,7 +59,7 @@ Scanner::nextToken()
         lexeme += currentChar;
         pos++;
 
-        while (pos < input.length() && (isalnum(input[pos]) || input[pos] == '_' || input[pos] == '.'))
+        while (pos < static_cast<int>(input.length()) && (isalnum(input[pos]) || input[pos] == '_' || input[pos] == '.'))
         {
             lexeme += input[pos];
             pos++;
@@ -71,8 +71,10 @@ Scanner::nextToken()
             lexeme == "new" || lexeme == "public" || lexeme == "return" ||
             lexeme == "static" || lexeme == "String" || lexeme == "this" ||
             lexeme == "true" || lexeme == "void" || lexeme == "while")
-
+        {
+            cout << lexeme;
             tok = new Token(RESERVED_KEYWORD, lexeme);
+        }
 
         else if (lexeme == "System.out.println")
         {
@@ -89,7 +91,7 @@ Scanner::nextToken()
         lexeme += currentChar;
         pos++;
 
-        while (pos < input.length() && isdigit(input[pos]))
+        while (pos < static_cast<int>(input.length()) && isdigit(input[pos]))
         {
             lexeme += input[pos];
             pos++;
@@ -102,29 +104,29 @@ Scanner::nextToken()
     else if (currentChar == '/')
     {
         // LINE COMMENT
-        if (pos + 1 < input.length() && input[pos + 1] == '/')
+        if (pos + 1 < static_cast<int>(input.length()) && input[pos + 1] == '/')
         {
             pos += 2;
 
-            while (pos < input.length() && input[pos] != '\n')
+            while (pos < static_cast<int>(input.length()) && input[pos] != '\n')
                 pos++;
 
             return nextToken();
         }
 
         // BLOCK COMMENT
-        else if (pos + 1 < input.length() && input[pos + 1] == '*')
+        else if (pos + 1 < static_cast<int>(input.length()) && input[pos + 1] == '*')
         {
             pos += 2;
 
-            while (pos < input.length() - 1 && (input[pos] != '*' || input[pos + 1] != '/'))
+            while (pos < static_cast<int>(input.length()) - 1 && (input[pos] != '*' || input[pos + 1] != '/'))
             {
                 if (input[pos] == '\n')
                     line++;
                 pos++;
             }
 
-            if (pos >= input.length() - 1)
+            if (pos >= static_cast<int>(input.length()) - 1)
                 lexicalError("BLOCK COMMENT NOT CLOSED.");
 
             pos += 2;
@@ -147,9 +149,9 @@ Scanner::nextToken()
         pos++;
 
         // Compund operator
-        if (pos < input.length() && (input[pos - 1] == '&' && input[pos] == '&' ||
-                                     input[pos - 1] == '=' && input[pos] == '=' ||
-                                     input[pos - 1] == '!' && input[pos] == '='))
+        if (pos < static_cast<int>(input.length()) && ((input[pos - 1] == '&' && input[pos] == '&') ||
+                                                       (input[pos - 1] == '=' && input[pos] == '=') ||
+                                                       (input[pos - 1] == '!' && input[pos] == '=')))
         {
             lexeme += input[pos];
             pos++;
