@@ -10,6 +10,10 @@ Implementation of the lexical analyzer for the MiniJava programming language wit
 
 `2. INTEGER LITERALS` A sequence of decimal digits representing an integer number.
 
+`3. OPERATORS` && < > + - \* / = == != !
+
+`4. SEPARATORS` ( ) [ ] { } ; . ,
+
 `5. RESERVED WORDS` boolean, class, else, extends, false, if, int, length,
 main, new, public, return, static, String, System.out.println, this, true, void, and while.
 
@@ -17,9 +21,11 @@ main, new, public, return, static, String, System.out.println, this, true, void,
 
 `7. WHITESPACE` Whitespace should be ignored. It includes \n \t \r \f.
 
-`3. OPERATORS` && < > + - \* / = == != !
+### NOTE
 
-`4. SEPARATORS` ( ) [ ] { } ; . ,
+• "System.out.println" should be treated as a single reserved word and not as a method call.
+
+• Reserved words are recognized as identifiers, except for "System.out.println" because it doesn't match the pattern of identifiers.
 
 ### COMPILE / EXECUTE
 

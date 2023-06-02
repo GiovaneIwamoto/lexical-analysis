@@ -69,23 +69,32 @@ Scanner::nextToken()
             lexeme == "int" || lexeme == "length" || lexeme == "main" ||
             lexeme == "new" || lexeme == "public" || lexeme == "return" ||
             lexeme == "static" || lexeme == "String" || lexeme == "this" ||
-            lexeme == "true" || lexeme == "void" || lexeme == "while")
+            lexeme == "true" || lexeme == "void" || lexeme == "while" ||
+            lexeme == "System.out.println")
         {
-            tok = new Token(RESERVED_KEYWORD, lexeme);
-        }
-
-        else if (lexeme == "System.out.println")
-        {
-            tok = new Token(RESERVED_KEYWORD, "System.out.println");
+            if (lexeme == "System.out.println")
+                tok = new Token(RESERVED_KEYWORD, "System.out.println");
+            else
+                tok = new Token(ID, lexeme);
         }
 
         else
+        {
+            string::size_type dotPos = lexeme.find('.');
+            if (dotPos != string::npos)
+            {
+                string errorMsg = "INVALID TOKEN: " + lexeme;
+                lexicalError(errorMsg);
+            }
+
             tok = new Token(ID, lexeme);
+        }
     }
 
     // ---------- INTEGER_LITERAL ----------
     else if (isdigit(currentChar))
     {
+
         lexeme += currentChar;
         pos++;
 
@@ -93,6 +102,19 @@ Scanner::nextToken()
         {
             lexeme += input[pos];
             pos++;
+        }
+
+        if (pos < static_cast<int>(input.length()) && (isalpha(input[pos]) && !isspace(input[pos])))
+        {
+
+            while (pos < static_cast<int>(input.length()) && (!isspace(input[pos])))
+            {
+                lexeme += input[pos];
+                pos++;
+            }
+
+            string errorMsg = "INVALID TOKEN: " + lexeme;
+            lexicalError(errorMsg);
         }
 
         tok = new Token(INTEGER_LITERAL, lexeme);
@@ -172,7 +194,7 @@ Scanner::nextToken()
     }
     else
     {
-        string errorMsg = "Invalid character: ";
+        string errorMsg = "INVALID CHARACTER: ";
         errorMsg += currentChar;
         lexicalError(errorMsg);
     }
@@ -181,7 +203,9 @@ Scanner::nextToken()
 
 void Scanner::lexicalError(string msg)
 {
-    cout << "LINE " << line << ": " << msg << endl;
+    cout << endl
+         << endl
+         << "LINE " << line << ": " << msg << endl;
 
     exit(EXIT_FAILURE);
 }

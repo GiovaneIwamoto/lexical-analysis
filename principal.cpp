@@ -19,7 +19,7 @@ int main(int argc, char *argv[])
     do
     {
         t = scanner->nextToken();
-        cout << t->name << " ";
+        cout << t->name << " -> " << t->lexeme << endl;
 
     } while (t->name != END_OF_FILE);
 
