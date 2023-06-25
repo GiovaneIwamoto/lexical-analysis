@@ -10,9 +10,9 @@ Implementation of the lexical analyzer for the MiniJava programming language wit
 
 `2. INTEGER LITERALS` A sequence of decimal digits representing an integer number.
 
-`3. OPERATORS` && < > + - \* / = == != !
+`3. OPERATORS` 
 
-`4. SEPARATORS` ( ) [ ] { } ; . ,
+`4. SEPARATORS`
 
 `5. RESERVED WORDS` boolean, class, else, extends, false, if, int, length,
 main, new, public, return, static, String, System.out.println, this, true, void, and while.
