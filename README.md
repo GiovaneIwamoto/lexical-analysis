@@ -13,7 +13,7 @@ Implementation of the lexical analyzer for the MiniJava programming language wit
 > [!IMPORTANT]
 > System.out.println should be treated as a single reserved word and not as a method call.
 
-```json
+```ruby
 [IDENTIFIERS] A sequence of letters, digits, and underscores, always starting with a letter.
 
 [INTEGER LITERALS] A sequence of decimal digits representing an integer number.
