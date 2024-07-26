@@ -14,20 +14,17 @@ Implementation of the lexical analyzer for the MiniJava programming language wit
 > System.out.println should be treated as a single reserved word and not as a method call.
 
 ```json
-1. [IDENTIFIERS] A sequence of letters, digits, and underscores, always starting with a letter.
+[IDENTIFIERS] A sequence of letters, digits, and underscores, always starting with a letter.
 
-2. [INTEGER LITERALS] A sequence of decimal digits representing an integer number.
+[INTEGER LITERALS] A sequence of decimal digits representing an integer number.
 
-3. [OPERATORS]
+[RESERVED WORDS] boolean, class, else, extends, false, if, int, length, main, new, public, return, static, String, System.out.println, this, true, void, and while.
 
-4. [SEPARATORS]
+[COMMENTS] Comments should be ignored. There are two types: line comments and block comments.
 
-5. [RESERVED WORDS] boolean, class, else, extends, false, if, int, length,
-main, new, public, return, static, String, System.out.println, this, true, void, and while.
+[WHITESPACE] Whitespace should be ignored. It includes \n \t \r \f.
 
-6. [COMMENTS] Comments should be ignored. There are two types: line comments and block comments.
-
-7. [WHITESPACE] Whitespace should be ignored. It includes \n \t \r \f.
+[OPERATORS] and [SEPARATORS]
 ```
 
 > [!NOTE]
