@@ -2,7 +2,10 @@
 
 ### **OVERVIEW**
 
-Implementation of the lexical analyzer for the MiniJava programming language with some extensions. MiniJava is a subset of Java, and its lexical analyzer should be able to recognize and return the tokens of the language specified in this document, which will later be terminal symbols of the grammar that specifies the language's accepted constructs.
+Implementation of the lexical analyzer for the MiniJava programming language with some extensions.
+
+> [!NOTE]
+> MiniJava is a subset of Java, and its lexical analyzer should be able to recognize and return the tokens of the language specified in this document, which will later be terminal symbols of the grammar that specifies the language's accepted constructs.
 
 [![Icons](https://skillicons.dev/icons?i=cpp,java,regex&theme=dark)](https://skillicons.dev)
 
@@ -27,14 +30,14 @@ Implementation of the lexical analyzer for the MiniJava programming language wit
 [OPERATORS] and [SEPARATORS]
 ```
 
-> [!NOTE]
-> Reserved words are recognized as identifiers, except for System.out.println because it doesn't match the pattern of identifiers.
+> [!WARNING]
+> Reserved words are recognized as identifiers, with the notable exception of System.out.println, because it doesn't match the typical pattern of identifiers.
 
 ---
 
 ### **COMPILE AND EXECUTE**
 
-```ruby
+```java
 $ g++ -Wall \*.cpp -o mjc
 $ ./mjc program.mj
 ```
