@@ -37,7 +37,7 @@ Implementation of the lexical analyzer for the MiniJava programming language wit
 
 ### **COMPILE AND EXECUTE**
 
-```python
+```ruby
 $ g++ -Wall \*.cpp -o mjc
 $ ./mjc program.mj
 ```
