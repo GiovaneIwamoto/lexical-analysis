@@ -2,7 +2,7 @@
 
 ### **OVERVIEW**
 
-Implementation of the lexical analyzer for the MiniJava programming language with some extensions.
+Implementation of the lexical analyzer for the MiniJava programming language with some extensions involves the development of a robust tool to recognize and categorize the various lexical elements of the language. This includes identifying keywords, operators, identifiers, literals, and other syntactic components, ensuring that each token is accurately classified for subsequent syntactic analysis. The lexical analyzer must handle these extensions seamlessly, maintaining the integrity and functionality of the MiniJava language while accommodating the new features.
 
 > [!NOTE]
 > MiniJava is a subset of Java, and its lexical analyzer should be able to recognize and return the tokens of the language specified in this document, which will later be terminal symbols of the grammar that specifies the language's accepted constructs.
@@ -37,7 +37,7 @@ Implementation of the lexical analyzer for the MiniJava programming language wit
 
 ### **COMPILE AND EXECUTE**
 
-```java
+```python
 $ g++ -Wall \*.cpp -o mjc
 $ ./mjc program.mj
 ```
